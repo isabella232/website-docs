@@ -12,10 +12,17 @@ import { Layout } from 'layout'
 export default function NotFoundPage({ data }: { data: AllLocales }) {
   const pathname = typeof window === 'undefined' ? '' : window.location.pathname
   const context = useContext(I18nextContext)
-  const language = useMemo(
-    () => (pathname.slice(1).startsWith('zh') ? 'zh' : 'en'),
-    [pathname]
-  )
+  const language = useMemo(() => {
+    const lang = pathname.split('/').shift()
+    switch (lang) {
+      case 'zh':
+        return 'zh'
+      case 'ja':
+        return 'ja'
+      default:
+        return 'en'
+    }
+  }, [pathname])
   const i18n = useMemo(() => {
     const i18n = i18next.createInstance()
 
