@@ -70,9 +70,20 @@ export function download(argv) {
           path,
           nPath.resolve(
             dest,
-            `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`
+            `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/master`
           )
         ),
+        options
+      )
+      break
+    case 'shczhen/docs':
+      retrieveAllMDsFromZip(
+        {
+          repo,
+          path,
+          ref,
+        },
+        genDest(repo, path, nPath.resolve(dest, `ja/tidb/${ref}`)),
         options
       )
       break
